@@ -1,0 +1,86 @@
+transaction_reference,transaction_date,customer_id,amount,currency,status,product_name,billing_email
+TXN001,2024-06-01,CUST001,150.00,USD,Completed,Premium Subscription,john.doe@example.com
+TXN002,2024-06-01,CUST002,75.50,USD,Completed,Basic Plan,jane.smith@example.com
+TXN003,2024-06-02,CUST003,200.00,USD,Pending,Enterprise License,mike.jones@example.com
+TXN004,2024-06-02,CUST004,50.00,USD,Completed,Add-on Feature,sarah.connor@example.com
+TXN005,2024-06-03,CUST005,120.75,USD,Completed,Annual Membership,david.lee@example.com
+TXN006,2024-06-03,CUST006,30.00,USD,Failed,One-time Service,lisa.chen@example.com
+TXN007,2024-06-04,CUST007,99.99,USD,Completed,Software License,chris.evans@example.com
+TXN008,2024-06-04,CUST008,180.00,USD,Refunded,Consulting Hour,emily.white@example.com
+TXN009,2024-06-05,CUST009,45.20,USD,Completed,Support Package,robert.brown@example.com
+TXN010,2024-06-05,CUST010,250.00,USD,Completed,Advanced Analytics,jessica.green@example.com
+TXN011,2024-06-06,CUST011,60.00,USD,Completed,Storage Upgrade,paul.black@example.com
+TXN012,2024-06-06,CUST012,88.00,USD,Pending,Website Design,olivia.taylor@example.com
+TXN013,2024-06-07,CUST013,110.50,USD,Completed,E-book Purchase,william.davis@example.com
+TXN014,2024-06-07,CUST014,195.00,USD,Completed,API Access,sophia.martinez@example.com
+TXN015,2024-06-08,CUST015,25.00,USD,Completed,Theme Pack,james.wilson@example.com
+TXN016,2024-06-08,CUST016,133.75,USD,Completed,Custom Report,elizabeth.moore@example.com
+TXN017,2024-06-09,CUST017,70.00,USD,Completed,Training Session,daniel.jackson@example.com
+TXN018,2024-06-09,CUST018,49.99,USD,Failed,Marketing Campaign,grace.harris@example.com
+TXN019,2024-06-10,CUST019,300.00,USD,Completed,Managed Hosting,benjamin.clark@example.com
+TXN020,2024-06-10,CUST020,85.00,USD,Completed,Integration Service,chloe.lewis@example.com
+TXN021,2024-06-11,CUST021,175.00,USD,Pending,Migration Assistance,samuel.robinson@example.com
+TXN022,2024-06-11,CUST022,220.00,USD,Completed,Consulting Service,zoe.walker@example.com
+TXN023,2024-06-12,CUST023,90.25,USD,Completed,Dashboard Access,andrew.hall@example.com
+TXN024,2024-06-12,CUST024,55.00,USD,Completed,Security Audit,lily.young@example.com
+TXN025,2024-06-13,CUST025,140.00,USD,Completed,API Subscription,jacob.king@example.com
+TXN026,2024-06-13,CUST026,105.00,USD,Completed,Monthly Service,mia.wright@example.com
+TXN027,2024-06-14,CUST027,65.00,USD,Failed,Domain Registration,alex.scott@example.com
+TXN028,2024-06-14,CUST028,15.00,USD,Completed,Email Add-on,sofia.green@example.com
+TXN029,2024-06-15,CUST029,290.00,USD,Completed,Premium Support,ethan.adams@example.com
+TXN030,2024-06-15,CUST030,72.50,USD,Completed,Data Export,ava.baker@example.com
+TXN031,2024-06-16,CUST031,160.00,USD,Completed,Custom Development,michael.gonzalez@example.com
+TXN032,2024-06-16,CUST032,95.00,USD,Pending,Software Upgrade,charlotte.perez@example.com
+TXN033,2024-06-17,CUST033,40.00,USD,Completed,Plugin Purchase,logan.rodriguez@example.com
+TXN034,2024-06-17,CUST034,170.00,USD,Completed,Integration Setup,amelia.kim@example.com
+TXN035,2024-06-18,CUST035,80.00,USD,Completed,Template Pack,harper.jones@example.com
+TXN036,2024-06-18,CUST036,210.00,USD,Completed,Advanced Training,evelyn.lee@example.com
+TXN037,2024-06-19,CUST037,35.00,USD,Failed,Virtual Assistant,benjamin.garcia@example.com
+TXN038,2024-06-19,CUST038,125.00,USD,Completed,Cloud Storage,abigail.hernandez@example.com
+TXN039,2024-06-20,CUST039,260.00,USD,Completed,Dedicated Server,elizabeth.martin@example.com
+TXN040,2024-06-20,CUST040,68.00,USD,Completed,Feature Unlock,david.thompson@example.com
+TXN041,2024-06-21,CUST041,190.00,USD,Pending,Consulting Block,sofia.white@example.com
+TXN042,2024-06-21,CUST042,100.00,USD,Completed,Security Patch,william.hall@example.com
+TXN043,2024-06-22,CUST043,58.00,USD,Completed,Add-on Module,chloe.adams@example.com
+TXN044,2024-06-22,CUST044,185.00,USD,Completed,Enterprise Support,alex.brown@example.com
+TXN045,2024-06-23,CUST045,92.00,USD,Completed,CRM Integration,mia.garcia@example.com
+TXN046,2024-06-23,CUST046,230.00,USD,Completed,Custom Reporting,james.kim@example.com
+TXN047,2024-06-24,CUST047,48.00,USD,Failed,Support Ticket,olivia.lee@example.com
+TXN048,2024-06-24,CUST048,115.00,USD,Completed,Data Migration,samuel.martin@example.com
+TXN049,2024-06-25,CUST049,270.00,USD,Completed,Server Maintenance,michael.white@example.com
+TXN050,2024-06-25,CUST050,78.00,USD,Completed,API Key Renewal,charlotte.adams@example.com
+TXN051,2024-06-01,CUST051,10.00,USD,Completed,Small Service,user51@example.com
+TXN052,2024-06-02,CUST052,20.00,USD,Completed,Small Item,user52@example.com
+TXN053,2024-06-03,CUST053,30.00,USD,Failed,Failed Attempt,user53@example.com
+TXN054,2024-06-04,CUST054,40.00,USD,Completed,Another Item,user54@example.com
+TXN055,2024-06-05,CUST055,50.00,USD,Pending,Processing,user55@example.com
+TXN056,2024-06-06,CUST056,60.00,USD,Completed,Subscription,user56@example.com
+TXN057,2024-06-07,CUST057,70.00,USD,Completed,License,user57@example.com
+TXN058,2024-06-08,CUST058,80.00,USD,Completed,Feature,user58@example.com
+TXN059,2024-06-09,CUST059,90.00,USD,Refunded,Refunded item,user59@example.com
+TXN060,2024-06-10,CUST060,100.00,USD,Completed,Big Service,user60@example.com
+TXN061,2024-06-11,CUST061,110.00,USD,Completed,Consultation,user61@example.com
+TXN062,2024-06-12,CUST062,120.00,USD,Completed,Upgrade,user62@example.com
+TXN063,2024-06-13,CUST063,130.00,USD,Pending,Installation,user63@example.com
+TXN064,2024-06-14,CUST064,140.00,USD,Completed,Custom Work,user64@example.com
+TXN065,2024-06-15,CUST065,150.00,USD,Completed,Special Project,user65@example.com
+TXN066,2024-06-16,CUST066,160.00,USD,Completed,Maintenance,user66@example.com
+TXN067,2024-06-17,CUST067,170.00,USD,Failed,Payment Denied,user67@example.com
+TXN068,2024-06-18,CUST068,180.00,USD,Completed,Support Contract,user68@example.com
+TXN069,2024-06-19,CUST069,190.00,USD,Completed,New Product,user69@example.com
+TXN070,2024-06-20,CUST070,200.00,USD,Completed,Extended License,user70@example.com
+INT_ONLY_01,2024-06-26,CUST901,500.00,USD,Completed,Big Internal Project,internal.user1@example.com
+INT_ONLY_02,2024-06-26,CUST902,120.00,USD,Pending,Manual Adjustment,internal.user2@example.com
+INT_ONLY_03,2024-06-26,CUST903,80.00,USD,Completed,Refund Request,internal.user3@example.com
+INT_ONLY_04,2024-06-26,CUST904,250.00,USD,Completed,Offline Sale,internal.user4@example.com
+INT_ONLY_05,2024-06-26,CUST905,175.00,USD,Void,Test Transaction,internal.user5@example.com
+TXN003_MISMATCH_AMT,2024-06-02,CUST003,205.00,USD,Pending,Enterprise License,mike.jones@example.com
+TXN006_MISMATCH_STATUS,2024-06-03,CUST006,30.00,USD,Completed,One-time Service,lisa.chen@example.com
+TXN012_MISMATCH_BOTH,2024-06-06,CUST012,85.00,USD,Completed,Website Design,olivia.taylor@example.com
+TXN018_MISMATCH_STATUS,2024-06-09,CUST018,49.99,USD,Completed,Marketing Campaign,grace.harris@example.com
+TXN021_MISMATCH_AMT,2024-06-11,CUST021,180.00,USD,Pending,Migration Assistance,samuel.robinson@example.com
+TXN027_MISMATCH_STATUS,2024-06-14,CUST027,65.00,USD,Completed,Domain Registration,alex.scott@example.com
+TXN032_MISMATCH_BOTH,2024-06-16,CUST032,90.00,USD,Completed,Software Upgrade,charlotte.perez@example.com
+TXN037_MISMATCH_STATUS,2024-06-19,CUST037,35.00,USD,Completed,Virtual Assistant,benjamin.garcia@example.com
+TXN041_MISMATCH_AMT,2024-06-21,CUST041,200.00,USD,Pending,Consulting Block,sofia.white@example.com
+TXN047_MISMATCH_STATUS,2024-06-24,CUST047,48.00,USD,Completed,Support Ticket,olivia.lee@example.com
