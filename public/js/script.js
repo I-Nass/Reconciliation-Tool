@@ -163,7 +163,7 @@ async function processFiles() {
         displayColumnInfo({ internal: internalClientFields, provider: providerClientFields });
 
         // Send transformed data to backend for reconciliation
-        const response = await fetch('http://localhost:3000/reconcile', {
+        const response = await fetch('https://reconciliation-tool.onrender.com', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ internal: transformedInternalData, provider: transformedProviderData })
