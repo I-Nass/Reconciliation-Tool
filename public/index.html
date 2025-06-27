@@ -38,12 +38,20 @@
 
     <main>
         <section class="upload-section">
-            <div class="card">
+            <div class="card drag-drop-area" id="internalDropArea">
                 <h3>Upload Internal CSV</h3>
+                <div class="drag-drop-text">
+                    <p>📁 Drag & drop your CSV file here</p>
+                    <p>or</p>
+                </div>
                 <input type="file" id="internalFile" accept=".csv">
             </div>
-            <div class="card">
+            <div class="card drag-drop-area" id="providerDropArea">
                 <h3>Upload Provider CSV</h3>
+                <div class="drag-drop-text">
+                    <p>🏦 Drag & drop your CSV file here</p>
+                    <p>or</p>
+                </div>
                 <input type="file" id="providerFile" accept=".csv">
             </div>
             <button id="reconcileBtn" onclick="processFiles()">🔍 Reconcile</button>

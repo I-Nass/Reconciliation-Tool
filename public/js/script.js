@@ -560,8 +560,9 @@ function clearAll() {
     showMessage("Current results cleared! History remains intact.", 3000);
 }
 
-// LOCAL STORAGE LOGIC: Save reconciliation results to history
-function saveHistory(entryData) {
+// Save reconciliation results to both local storage and database
+async function saveHistory(entryData) {
+    // Local storage backup
     const history = JSON.parse(
         localStorage.getItem("reconciliationHistory") || "[]",
     );
@@ -570,14 +571,138 @@ function saveHistory(entryData) {
         timestamp: new Date().toLocaleString(),
         internalFileName: entryData.internalFileName,
         providerFileName: entryData.providerFileName,
-        internalData: entryData.internalData, // Save original data for re-viewing
-        providerData: entryData.providerData, // Save original data for re-viewing
+        internalData: entryData.internalData, // Save original data for preview/debug from history
+        providerData: entryData.providerData, // Save original data for preview/debug from history
         result: entryData.result,
     };
 
     history.unshift(entry); // Add newest entry to the beginning
     localStorage.setItem("reconciliationHistory", JSON.stringify(history));
+
+    // Save to database
+    try {
+        const cacheKey = generateCacheKey(
+            { name: entryData.internalFileName, size: 0, lastModified: Date.now() },
+            { name: entryData.providerFileName, size: 0, lastModified: Date.now() }
+        );
+
+        await fetch('/save-history', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                internal_filename: entryData.internalFileName,
+                provider_filename: entryData.providerFileName,
+                result: entryData.result,
+                cache_key: cacheKey
+            })
+        });
+    } catch (err) {
+        console.warn('Failed to save to database, using local storage only:', err);
+    }
+
     renderHistory(); // Update history display
+    renderTrendAnalysis(); // Update trend analysis
+}
+
+// Trend Analysis
+async function renderTrendAnalysis() {
+    try {
+        const response = await fetch('/history?limit=10');
+        const historyData = await response.json();
+
+        if (historyData.length < 2) return; // Need at least 2 records for trends
+
+        let trendSection = document.getElementById("trendAnalysis");
+        if (!trendSection) {
+            trendSection = document.createElement("section");
+            trendSection.id = "trendAnalysis";
+            trendSection.className = "trend-analysis";
+            const historySection = document.getElementById("history");
+            if (historySection) {
+                historySection.parentNode.insertBefore(trendSection, historySection);
+            }
+        }
+
+        const trends = calculateTrends(historyData);
+
+        trendSection.innerHTML = `
+            <h3>📈 Reconciliation Trends</h3>
+            <div class="trend-chart">
+                <p>📊 Chart visualization (${historyData.length} recent reconciliations)</p>
+            </div>
+            <div class="trend-metrics">
+                <div class="trend-metric">
+                    <h4>Average Match Rate</h4>
+                    <div class="value">${trends.avgMatchRate}%</div>
+                    <div class="change trend-${trends.matchRateTrend.direction}">
+                        ${trends.matchRateTrend.direction === 'up' ? '↗' : trends.matchRateTrend.direction === 'down' ? '↘' : '→'} 
+                        ${trends.matchRateTrend.change}%
+                    </div>
+                </div>
+                <div class="trend-metric">
+                    <h4>Processing Volume</h4>
+                    <div class="value">${trends.avgVolume}</div>
+                    <div class="change trend-${trends.volumeTrend.direction}">
+                        ${trends.volumeTrend.direction === 'up' ? '↗' : trends.volumeTrend.direction === 'down' ? '↘' : '→'} 
+                        ${trends.volumeTrend.change}%
+                    </div>
+                </div>
+                <div class="trend-metric">
+                    <h4>Error Rate</h4>
+                    <div class="value">${trends.avgErrorRate}%</div>
+                    <div class="change trend-${trends.errorRateTrend.direction}">
+                        ${trends.errorRateTrend.direction === 'up' ? '↗' : trends.errorRateTrend.direction === 'down' ? '↘' : '→'} 
+                        ${trends.errorRateTrend.change}%
+                    </div>
+                </div>
+            </div>
+        `;
+
+        trendSection.style.display = "block";
+    } catch (err) {
+        console.warn('Failed to render trend analysis:', err);
+    }
+}
+
+function calculateTrends(historyData) {
+    if (historyData.length === 0) return {};
+
+    const recent = historyData.slice(0, Math.ceil(historyData.length / 2));
+    const older = historyData.slice(Math.ceil(historyData.length / 2));
+
+    const calculateStats = (data) => {
+        const totalRecords = data.reduce((sum, item) => 
+            sum + item.matched_count + item.internal_only_count + item.provider_only_count + item.mismatched_count, 0);
+        const totalMatched = data.reduce((sum, item) => sum + item.matched_count, 0);
+        const totalErrors = data.reduce((sum, item) => sum + item.internal_only_count + item.provider_only_count, 0);
+
+        return {
+            matchRate: totalRecords > 0 ? (totalMatched / totalRecords * 100) : 0,
+            errorRate: totalRecords > 0 ? (totalErrors / totalRecords * 100) : 0,
+            avgVolume: Math.round(totalRecords / data.length)
+        };
+    };
+
+    const recentStats = calculateStats(recent);
+    const olderStats = calculateStats(older);
+
+    const getTrend = (current, previous) => {
+        const change = current - previous;
+        const percentChange = previous > 0 ? Math.round((change / previous) * 100) : 0;
+        return {
+            change: Math.abs(percentChange),
+            direction: change > 0 ? 'up' : change < 0 ? 'down' : 'neutral'
+        };
+    };
+
+    return {
+        avgMatchRate: Math.round(recentStats.matchRate),
+        avgErrorRate: Math.round(recentStats.errorRate),
+        avgVolume: recentStats.avgVolume,
+        matchRateTrend: getTrend(recentStats.matchRate, olderStats.matchRate),
+        errorRateTrend: getTrend(recentStats.errorRate, olderStats.errorRate),
+        volumeTrend: getTrend(recentStats.avgVolume, olderStats.avgVolume)
+    };
 }
 
 // LOCAL STORAGE LOGIC: Render reconciliation history
