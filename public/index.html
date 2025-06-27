@@ -54,8 +54,10 @@
                 </div>
                 <input type="file" id="providerFile" accept=".csv">
             </div>
-            <button id="reconcileBtn" onclick="processFiles()">🔍 Reconcile</button>
-            <button onclick="clearAll()" class="clear-btn">🧹 Clear All</button>
+            <div class="d-flex flex-column flex-md-row gap-2 mt-3">
+  <button id="reconcileBtn" onclick="processFiles()" class="btn btn-primary">🔍 Reconcile</button>
+  <button onclick="clearAll()" class="btn btn-outline-danger">🧹 Clear All</button>
+            </div>
         </section>
 
         <!-- Container for file previews -->
