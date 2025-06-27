@@ -80,14 +80,6 @@ function inferFields(data) {
     return inferred;
 }
 
-    // Fallback for ID if still null, use the first header
-    if (!inferred.id && headers.length > 0) {
-        inferred.id = headers[0];
-    }
-
-    return inferred;
-}
-
 /**
  * Transforms the input data by renaming inferred columns to backend-expected keys.
  * @param {Array<Object>} data - The original parsed CSV data.
