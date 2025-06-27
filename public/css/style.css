@@ -279,6 +279,30 @@ pre {
 .modal-content button:hover {
   background-color: #2f855a;
 }
+/* Button cards */
+
+.button-group-container button {
+  
+  max-width: unset; /* Remove any max-width restrictions if present */
+  /* Ensure padding, font-size etc. are consistent */
+  padding: 12px 25px; /* Keep consistent padding */
+  font-size: 1.05rem; /* Keep consistent font size */
+  border-radius: 8px; /* Keep consistent border-radius */
+  font-weight: 600; /* Keep consistent font weight */
+}
+
+/* Ensure the button-group-container itself takes appropriate width */
+.button-group-container {
+  display: flex;
+  flex-direction: row; /* Keep as row for larger screens */
+  gap: 15px; /* Keep or adjust gap between buttons */
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  width: auto; /* Let the container size based on its content or parent's flex rules */
+  max-width: 600px; /* Optional: Limit max width if you don't want them super wide on very large screens */
+}
+
 
 /* Status highlight */
 .status-green { color: var(--success-green); font-weight: 600;}

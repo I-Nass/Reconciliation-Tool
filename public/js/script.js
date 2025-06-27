@@ -865,3 +865,91 @@ window.addEventListener("DOMContentLoaded", () => {
     // Render history if available
     renderHistory();
 });
+
+
+// drag and drop
+
+const internalDropArea = document.getElementById('internalDropArea');
+const internalFileInput = document.getElementById('internalFile');
+const providerDropArea = document.getElementById('providerDropArea');
+const providerFileInput = document.getElementById('providerFile');
+
+// Helper function to set up drag-and-drop for a given drop zone and file input
+function setupDropZone(dropZone, fileInput) {
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false); // For global prevention
+    });
+
+    // Add visual highlight when dragging over
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => dropZone.classList.add('drag-highlight'), false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => dropZone.classList.remove('drag-highlight'), false);
+    });
+
+    // Handle dropped files
+    dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        if (files.length) {
+            fileInput.files = files; // Assign files to the hidden input
+            showMessage(`File selected: ${files[0].name}`, 2000);
+            updateFileDisplay(fileInput, dropZone); // Update visual display
+        }
+    }, false);
+
+    // Allow clicking the drop zone to open the file input dialog
+    dropZone.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // Update display when file is selected via click (or drag/drop)
+    fileInput.addEventListener('change', () => {
+        updateFileDisplay(fileInput, dropZone);
+    });
+}
+
+// Function to prevent default drag/drop behavior
+function preventDefaults (e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+// Function to update the text inside the drop zone to show the selected file
+function updateFileDisplay(fileInput, dropZone) {
+    const dragDropTextContainer = dropZone.querySelector('.drag-drop-text');
+    if (fileInput.files.length > 0) {
+        dragDropTextContainer.innerHTML = `<p class="file-display">Selected: ${fileInput.files[0].name}</p>`;
+    } else {
+        dragDropTextContainer.innerHTML = `
+            <p>📁 Drag & drop your CSV file here</p>
+            <p>or</p>
+        `;
+    }
+}
+
+// --- CALL THESE SETUP FUNCTIONS ON DOMContentLoaded ---
+window.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("introModal");
+
+    // Only show modal if it hasn't been dismissed in this session
+    if (!sessionStorage.getItem("modalDismissed")) {
+        modal.classList.add("show");
+    } else {
+        modal.style.display = "none";
+    }
+
+    // Initialize drag-and-drop for both areas
+    setupDropZone(internalDropArea, internalFileInput);
+    setupDropZone(providerDropArea, providerFileInput);
+
+    // Render history if available
+    renderHistory();
+    // Render trend analysis
+    renderTrendAnalysis(); // Make sure this is called here if you want it on load
+});
