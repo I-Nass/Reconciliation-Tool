@@ -80,6 +80,14 @@ function inferFields(data) {
     return inferred;
 }
 
+    // Fallback for ID if still null, use the first header
+    if (!inferred.id && headers.length > 0) {
+        inferred.id = headers[0];
+    }
+
+    return inferred;
+}
+
 /**
  * Transforms the input data by renaming inferred columns to backend-expected keys.
  * @param {Array<Object>} data - The original parsed CSV data.
@@ -163,7 +171,7 @@ async function processFiles() {
         displayColumnInfo({ internal: internalClientFields, provider: providerClientFields });
 
         // Send transformed data to backend for reconciliation
-        const response = await fetch('https://reconciliation-tool.onrender.com', {
+        const response = await fetch('/reconcile', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ internal: transformedInternalData, provider: transformedProviderData })
